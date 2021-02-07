@@ -27,8 +27,9 @@ $('#addMovie').on('click', function(event) {
     event.preventDefault();
     const title = $('#movieTitle').val();
     const rating = $('#movieRating').val();
-    movies = addMovie(title, rating);     // not sure this is the best way to orchestrate this
+    const movies = addMovie(title, rating);
     updateDOM(movies);
+    $('input').val('');
 })
 
 $('#movies').on('click', '.remove', function(){
@@ -51,6 +52,9 @@ function addMovie(title, rating) {
 }
 
 function updateDOM(movies) {
+    if(!movies) {
+        return;
+    }
     $('#movies').html('');
     movies.forEach(movie => {
         $('<div>')
