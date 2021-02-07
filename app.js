@@ -1,4 +1,5 @@
-$('#addMovie').on('click', function() {
+$('#addMovie').on('click', function(event) {
+    event.preventDefault();
     const title = $('#movieTitle').val();
     const rating = $('#movieRating').val();
     addMovie(title, rating);
