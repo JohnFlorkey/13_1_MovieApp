@@ -32,6 +32,16 @@ $('#addMovie').on('click', function(event) {
     $('input').val('');
 })
 
+$('#sortTitle').on('click', () => {
+    sortMoviesTitle(movies);
+    updateDOM(movies);
+    })
+
+$('#sortRating').on('click', () => {
+    sortMoviesRating(movies);
+    updateDOM(movies);
+    })
+
 $('#movies').on('click', '.remove', function(){
     movies.splice(movies.findIndex((movie => movie.id === $(this).parent().attr('id'))), 1);
     updateDOM(movies);
@@ -63,4 +73,22 @@ function updateDOM(movies) {
             .append($('<button>').text('Remove').addClass('remove'))
             .appendTo('#movies');
     });
+}
+
+function sortMoviesTitle(movies) {
+    return movies.sort((a,b) => {
+        const titleA = a.title.toUpperCase();
+        const titleB = b.title.toUpperCase();
+        if(titleA < titleB){
+            return -1;
+        }
+        if(titleA > titleB){
+            return 1;
+        }
+        return 0;
+    });
+}
+
+function sortMoviesRating(movies) {
+    return movies.sort((a, b) => a.rating - b.rating)
 }
